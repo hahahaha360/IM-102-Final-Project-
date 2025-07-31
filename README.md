@@ -61,10 +61,50 @@ This project was developed as part of the IM 102 Final Project to demonstrate fu
 
 ---
 
-## 🧪 How to Run the Project
+## 🧪 How to start the Project
 
 ### 1. Clone the Repository
+## 🛠️ Git Setup Guide (for Collaborators)
+
+If you're working on this project, make sure Git is installed on your computer.
+
+### 📥 Download Git (Latest Version)
+
+👉 [Download Git for Windows, macOS, or Linux](https://git-scm.com/downloads)
+
+This link will auto-detect your operating system.
+
+---
+
+### ✅ After Installing Git
+
+Open your terminal or Git Bash and check the installed version:
 
 ```bash
+git --version
+
+## 👥 Team Git Workflow
+# 1. Clone the project
 git clone https://github.com/hahahaha360/IM-102-Final-Project-.git
 cd IM-102-Final-Project-
+
+# 2. Install dependencies (if Node.js is used)
+npm install
+
+# 3. Start coding! Make your changes...
+
+# 4. Add and commit
+git add .
+git commit -m "Your message"
+
+# 5. Push to GitHub
+git push origin main - 	Sends your local commits to GitHub (or remote)
+git pull origin main - 	Gets the latest changes from GitHub into your local code
+
+
+## after making changes 
+git status
+git add movies.html (any file)
+git commit -m "message"
+git push origin main
+git status (nothing to commit, working tree clean)
