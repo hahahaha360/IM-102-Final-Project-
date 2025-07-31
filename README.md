@@ -100,3 +100,11 @@ git commit -m "Your message"
 # 5. Push to GitHub
 git push origin main - 	Sends your local commits to GitHub (or remote)
 git pull origin main - 	Gets the latest changes from GitHub into your local code
+
+
+##after making changes 
+git status
+git add movies.html (any file)
+git commit -m "message"
+git push origin main
+git status (nothing to commit, working tree clean)
