@@ -102,7 +102,7 @@ git push origin main - 	Sends your local commits to GitHub (or remote)
 git pull origin main - 	Gets the latest changes from GitHub into your local code
 
 
-##after making changes 
+## after making changes 
 git status
 git add movies.html (any file)
 git commit -m "message"
