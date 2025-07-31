@@ -1,13 +1,52 @@
-
 html, body {
   background-image: url('https://images.unsplash.com/photo-1640725633496-96aec00d1ab2?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-  background-size: 100%;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-
-  height: 90%;
-  margin: 0;
-  padding: 0;
+  background-attachment: fixed;
+  background-size: cover;
   
+
+  height: 80%;
+  margin:0;
+  padding: 0;
+}
+
+.icon {
+  font-family: "Dela Gothic One";
+  font-weight: 50;
+  font-style:normal;
+  font-size: 150%;
+  color: rgb(255, 255, 255);
+  margin-left: 60px;
+}
+
+.txt {
+  font-family: "Dela Gothic One";
+  font-weight: 100;
+  font-style:normal;
+  font-size: 750%;
+  color: rgb(255, 255, 255);
+  margin-left: 150px;
+  margin-top: 10px;
+}
+
+.txt2 {
+  font-family: "Dela Gothic One";
+  font-weight: 100;
+  font-style:normal;
+  font-size: 400%;
+  color: rgb(255, 255, 255);
+  margin-left: 150px;
+  margin-top: -80px;
+}
+
+p{
+  color: white;
+  font-family: "Delius";
+  font-weight: 0;
+  font-style:normal;
+  margin-left: 150px;
+
 }
 
