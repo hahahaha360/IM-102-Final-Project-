@@ -31,14 +31,6 @@ html, body {
   margin-top: 10px;
 }
 
-/* .txt2 {
-  font-family: "Dela Gothic One";
-  font-weight: 100;
-  font-style:normal;
-  font-size: 400%;
-  color: rgb(171, 169, 169);
-  margin-top: -90px;
-} */
 .txt2 {
   font-family: "Dela Gothic One";
   font-weight: 100;
@@ -54,6 +46,13 @@ p{
   font-family: "Delius";
   font-weight: 0;
   font-style:normal;
+
+  
+  font-size: 14px;
+  position: static;
+  display: block;
+ 
+
 }
 .txttitle{
   margin-left: 150px;
@@ -126,61 +125,69 @@ p{
   color:#d46300;
   text-decoration: none;
 }
-/* 
-@media (max-width: 768px) {
-  .container {
-    position: static;
-    transform: none;
-    margin: 100px auto;
-    padding: 40px 20px;
-    max-width: 90%;
+
+
+/*(phones, 424px below) */
+@media (max-width: 424px) {
+    
+   body {
     height: auto;
+    margin: 0;
+    padding: 0;
+    
+  }
+  .overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust 0.5 to make it darker/lighter */
+  z-index: 0;
   }
 
-  .txt, .txt2, .txttitle {
-    text-align: center;
-    font-size: 250%;
-    margin-left: 0;
-    margin-top: 20px;
+ 
+ .content {
+  position: relative;
+  z-index: 1; /* Ensure it's above the dark layer */
   }
-
   .icon {
-    margin-left: 0;
-    text-align: center;
-    display: block;
-    font-size: 120%;
+    margin-left: 10px;
+    font-size: 80%;
   }
-
-  .logintxt {
-    transform: none;
-    text-align: center;
-    font-size: 20px;
-  }
-
-  .input {
-    transform: none;
-    width: 100%;
-    font-size: 16px;
-  }
-
-  .btnlogin {
-    width: 100%;
-    transform: none;
-  }
-
-  .inputs {
-    transform: none;
-  }
-
-  .switch {
-    font-size: 13px;
-    white-space: normal;
+  .txttitle{
+    margin-left: 10px;
+    font-size: 60%;
     text-align: center;
   }
-} */
+  .txt2{
+    margin-top: -20%;
+  }
+  .logintxt{
+    text-align: left;
+    margin-left: -7%;
+  }
+  .container {
+    width: 40%;
+    height: auto;
+    max-height: 300px;
+    margin-left: 19%;
+    margin-top: 20%;
+    transform: none; /* Remove any previous translateX() */
+    position: relative; /* Change to relative for better responsiveness */
 
-/*(phones, 320px - 375px) */
-@media (max-width: 375px) {
+  }
+
+.inputs {
+  width: 200%;         
+  margin: 10px 0;
+  padding: 10px;
+  margin-left:-50%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.switch{
+  margin-left: -39%;
+}
+
 }
 
 /*(phones, 376px - 425px) */
@@ -189,16 +196,21 @@ p{
 
 /*(tablets, 426px - 768px) */
 @media (max-width: 768px) {
-
+  
 }
 
 /*(laptops, 769px - 1024px) */
 @media (max-width: 1024px) {
+  .txttitle{
+  margin-left: 5%;
+ }
+
 }
 
 /*(desktops, 1025px - 1440px) */
 @media (min-width: 1025px) {
-
+  
+ 
 }
 
 /*(1441px and above) */

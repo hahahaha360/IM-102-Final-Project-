@@ -11,22 +11,25 @@
     </style>
 </head>
 <body>
-    
+    <div class="overlay"></div>
+    <div class="content">
     <div class="headnav">
         <h1 class="icon">II BSIT A</h1>
     </div>
     <div class="txttitle">
       <h1 class="txt">Movies</h1>
       <h2 class="txt2">CRUD</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut <br> labore et dolore magna aliqua. 
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris <br>nisi ut aliquip ex ea commodo consequat. 
-        Duis aute irure dolor in reprehenderit in voluptate velit esse.<br> </p>
-    </div>
+ <p>
+  A simple web app to add, view, edit, and delete movies. Perfect for managing your film collection with ease and style.
+</p>
 
+
+    </div>
+    </div>
     <div class="container">
       <h2 class="logintxt">Login</h2>
     <div class="inputs">
-    <form action="/auth/login" method="POST">
+    <form action="http://localhost:3000/auth/login" method="POST">
       <input type="text" name="username" placeholder="Username:" required class="input">
       <input type="password" name="password" placeholder="Password:" required class="input">
       <button type="submit" class="btnlogin">Login</button>
