@@ -71,3 +71,20 @@ app.post('/auth/login', (req, res) => {
     });
 });
 
+// REGISTER ROUTE
+app.post('/auth/register', (req, res) => {
+    const { username, password } = req.body;
+
+    // Add user validation & hashing here
+
+    const sql = 'INSERT INTO users (username, password) VALUES (?, ?)';
+    db.query(sql, [username, password], (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ message: 'Database error' });
+        }
+        res.status(201).json({ message: 'User registered successfully' });
+    });
+});
+
+

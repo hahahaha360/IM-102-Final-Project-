@@ -12,6 +12,20 @@ html, body {
   padding: 0;
 }
 
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.405); /* Adjust 0.5 to make it darker/lighter */
+  z-index: 0;
+  padding: 100%;
+  }
+
+ 
+ .content {
+  position: relative;
+  z-index: 1; /* Ensure it's above the dark layer */
+  }
+
 .icon {
   font-family: "Dela Gothic One";
   font-weight: 50;
@@ -61,7 +75,7 @@ p{
 .container{
 
   /* background-color: #d4d5d6dd; */
-   background-color: #d4d5d6e8;
+   background-color: #d4d5d6c6;
   padding: 100px;
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
