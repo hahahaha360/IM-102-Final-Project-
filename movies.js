@@ -47,25 +47,25 @@ app.listen(3000, () => {
     console.log('Server is running on port 3000');
 });
 
-// LOGIN ROUTE
-app.post('/auth/login', (req, res) => {
-    const { username, password } = req.body;
+// // LOGIN ROUTE
+// app.post('/auth/login', (req, res) => {
+//     const { username, password } = req.body;
 
-    if (!username || !password) {
-        return res.status(400).json({ message: 'Please provide username and password' });
-    }
+//     if (!username || !password) {
+//         return res.status(400).json({ message: 'Please provide username and password' });
+//     }
 
-    const sql = 'SELECT * FROM users WHERE username = ? AND password = ?';
-    db.query(sql, [username, password], (err, results) => {
-        if (err) {
-            console.error('Query error:', err);
-            return res.status(500).json({ message: 'Database error' });
-        }
+//     const sql = 'SELECT * FROM users WHERE username = ? AND password = ?';
+//     db.query(sql, [username, password], (err, results) => {
+//         if (err) {
+//             console.error('Query error:', err);
+//             return res.status(500).json({ message: 'Database error' });
+//         }
 
-        if (results.length > 0) {
-            res.status(200).json({ message: 'Login successful' });
-        } else {
-            res.status(401).json({ message: 'Invalid username or password' });
-        }
-    });
-});
+//         if (results.length > 0) {
+//             res.status(200).json({ message: 'Login successful' });
+//         } else {
+//             res.status(401).json({ message: 'Invalid username or password' });
+//         }
+//     });
+// });
