@@ -259,8 +259,8 @@ p{
     max-height: 300px;
     margin-left: 19%;
     margin-top: 20%;
-    transform: none; /* Remove any previous translateX() */
-    position: relative; /* Change to relative for better responsiveness */
+    transform: none; 
+    position: relative; 
   }
   .overlay {
   position: absolute;
