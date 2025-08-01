@@ -22,6 +22,21 @@
         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris <br>nisi ut aliquip ex ea commodo consequat. 
         Duis aute irure dolor in reprehenderit in voluptate velit esse.<br> </p>
     </div>
+
+    <div class="container">
+      <h2 class="logintxt">Login</h2>
+    <div class="inputs">
+    <form action="/auth/login" method="POST">
+      <input type="text" name="username" placeholder="Username:" required class="input">
+      <input type="password" name="password" placeholder="Password:" required class="input">
+      <button type="submit" class="btnlogin">Login</button>
+    </form>
+    </div>
+    <div class="switch">
+      Don't have an account? <a href="/register.html">Register here</a>
+    </div>
+    </div>
+
     <script src="movies.js"></script>
 </body>
 </html>
