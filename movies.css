@@ -273,8 +273,6 @@ p{
   position: relative;
   z-index: 1; /* Ensure it's above the dark layer */
   }
-
-  
 }
 
 /*(laptops, 769px - 1024px) */
