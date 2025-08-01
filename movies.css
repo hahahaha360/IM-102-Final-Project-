@@ -128,7 +128,7 @@ p{
 
 
 /*(phones, 424px below) */
-@media (max-width: 424px) {
+@media (max-width: 500px) {
     
    body {
     height: auto;
@@ -141,6 +141,7 @@ p{
   inset: 0;
   background-color: rgba(0, 0, 0, 0.5); /* Adjust 0.5 to make it darker/lighter */
   z-index: 0;
+  padding: 100%;
   }
 
  
@@ -158,7 +159,7 @@ p{
     text-align: center;
   }
   .txt2{
-    margin-top: -20%;
+    margin-top: -17%;
   }
   .logintxt{
     text-align: left;
@@ -176,10 +177,10 @@ p{
   }
 
 .inputs {
-  width: 200%;         
+  width: 180%;         
   margin: 10px 0;
   padding: 10px;
-  margin-left:-50%;
+  margin-left:-40%;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -189,21 +190,96 @@ p{
 }
 
 }
+/*(phones, 376px - 425px) */
+@media (max-width: 600px) {
+  .container{
+    width: 50%;
+    height: auto;
+
+    margin-top: 20%;
+    transform: none; /* Remove any previous translateX() */
+    position: relative; /* Change to relative for better responsiveness */
+  }
+
+   .txttitle{
+    margin-left: 10px;
+    font-size: 60%;
+    text-align: center;
+  }
+  .txt2{
+    margin-top: -14%;
+  }
+  .logintxt{
+    text-align: left;
+    margin-left: -7%;
+  }
+  .inputs {
+  width: 180%;         
+  margin: 10px 0;
+  padding: 10px;
+  margin-left:-40%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.btnlogin{
+   width: 110%; 
+}
+}
+
 
 /*(phones, 376px - 425px) */
-@media (max-width: 425px) {
+@media (max-width: 700px) {
+ 
 }
 
 /*(tablets, 426px - 768px) */
 @media (max-width: 768px) {
+
+  .txttitle{
+    text-align: center;
+    margin-left: 5%;
+  }
+
+  p{
+    font-size: 12px;
+    margin-left: -5%;
+ 
+  }    
+   body {
+    height: auto;
+    margin: 0;
+    padding: 0;
+    
+  }
+
+   .container {
+    width: 40%;
+    height: auto;
+    max-height: 300px;
+    margin-left: 19%;
+    margin-top: 20%;
+    transform: none; /* Remove any previous translateX() */
+    position: relative; /* Change to relative for better responsiveness */
+  }
+  .overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust 0.5 to make it darker/lighter */
+  z-index: 0;
+  padding: 100%;
+  }
+ .content {
+  position: relative;
+  z-index: 1; /* Ensure it's above the dark layer */
+  }
+
   
 }
 
 /*(laptops, 769px - 1024px) */
 @media (max-width: 1024px) {
-  .txttitle{
-  margin-left: 5%;
- }
+  
 
 }
 
