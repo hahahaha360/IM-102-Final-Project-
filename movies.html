@@ -38,7 +38,39 @@
     </div>
     </div>
 
-    <script src="movies.js"></script>
+    <script>
+          
+      // Login functionality
+      document.querySelector("form").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const username = document.querySelector('input[name="username"]').value;
+        const password = document.querySelector('input[name="password"]').value;
+
+        try {
+          const response = await fetch("http://localhost:3000/auth/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ username, password })
+          });
+
+          const data = await response.json();
+
+          if (data.message === "Login successful") {
+            window.location.href = "/dashboard.html";
+          } else {
+            alert(data.message);
+          }
+
+        } catch (error) {
+          alert("Server error. Please try again.");
+          console.error("Login error:", error);
+        }
+      });
+    
+    </script>
 </body>
 </html>
 
