@@ -79,7 +79,7 @@ p{
 .logintxt {
   width: 100%;
   height: auto;
-  transform: translate(38%, -300%);
+  transform: translate(18%, -300%);
   font-family: "inter";
   font-weight: 400;
 }
@@ -103,6 +103,19 @@ p{
   border: none;
   background-color: #d46300;
   color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  transform: translate(-3%, -10%);
+}
+
+.btnregister{
+  width: 109%;
+  height: 50px;
+  border-radius: 5px;
+  border: none;
+  background-color: #ede2d9f3;
+  color:#d46300;
   font-size: 16px;
   cursor: pointer;
   margin-top: 20px;
