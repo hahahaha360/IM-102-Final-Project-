@@ -88,6 +88,7 @@ p{
   right: 60px;         /* space from the right edge */
   top: 50%;
   transform: translateY(-50%);
+   z-index: 2;
 }
 
 .logintxt {
