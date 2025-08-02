@@ -75,8 +75,7 @@ app.post('/auth/login', (req, res) => {
 app.post('/auth/register', (req, res) => {
     const { username, password } = req.body;
 
-    // Add user validation & hashing here
-
+    
     const sql = 'INSERT INTO users (username, password) VALUES (?, ?)';
     db.query(sql, [username, password], (err, result) => {
         if (err) {
