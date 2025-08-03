@@ -37,8 +37,8 @@ body{
 }
 
 .search-input {
-  width: 100%;
-  max-width: 60%;
+  width: 40%;
+  margin-left: -210px;;
   height: 40px;
   padding: 10px;
   border-radius: 10px;
@@ -46,7 +46,16 @@ body{
   font-size: 16px;
 }
 
-.searchbtn {
+.retrievebtn {
+  padding: 20px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  background-color: #d46300;
+  color: white;
+  cursor: pointer;
+}
+.addbtn {
   padding: 20px 20px;
   font-size: 16px;
   border: none;
