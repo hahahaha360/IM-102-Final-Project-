@@ -59,7 +59,67 @@ body{
  margin-left: 16%;
 }
 th{
-    padding-right: 150px; /* adjust spacing as needed */
+    padding-right: 140px; /* adjust spacing as needed */
+   
+
+}
+
+/* Small Phones */
+@media (max-width: 480px) {
+  .search-input {
+    max-width: 80%;
+    font-size: 14px;
+  }
+  .searchbtn {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  th {
+    padding-right: 40px;
+  }
+  .table-container {
+    margin-left: 5%;
+    overflow-x: auto;
+  }
+}
+
+/* Larger Phones & Tablets */
+@media (min-width: 481px) and (max-width: 768px) {
+  .search-input {
+    max-width: 70%;
+  }
+  .searchbtn {
+    padding: 16px 18px;
+  }
+  th {
+    padding-right: 80px;
+  }
+  .table-container {
+    margin-left: 8%;
+  }
+}
+
+/* Laptops */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .search-input {
+    max-width: 60%;
+  }
+  .searchbtn {
+    padding: 18px 20px;
+  }
+  th {
+    padding-right: 100px;
+  }
+}
+
+/* Large Screens */
+@media (min-width: 1025px) {
+  .search-input {
+    max-width: 60%;
+  }
+  th {
+    padding-right: 140px;
+  }
 }
 
 
