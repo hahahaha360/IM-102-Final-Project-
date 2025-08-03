@@ -1,4 +1,65 @@
 body{
-    background-color: #2c2b2b;
+    background-color: #F6F5F0;
     font-family: "inter";
+    height: 100%;
+    max-height: auto;
 }
+
+.icon {
+  font-family: "Dela Gothic One";
+  font-weight: 50;
+  font-style:normal;
+  font-size: 120%;
+  color: #CC6D2E;
+  margin-left: 50px;
+  margin-top: 20px;
+}
+.container {
+    text-align: center;
+}
+.dashboard-title {
+  
+    font-family: "";
+    font-weight: 100;
+    font-style: normal;
+    font-size: 350%;
+    margin-top: 20px;
+}
+.dashboard-description{
+    opacity: 60%;
+}
+.search-box {
+  display: flex;
+  justify-content: center;   
+  align-items: center;      
+  gap: 10px;
+  margin-top: 10vh;        
+}
+
+.search-input {
+  width: 100%;
+  max-width: 60%;
+  height: 40px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.searchbtn {
+  padding: 20px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #d46300;
+  color: white;
+  cursor: pointer;
+}
+.table-container{
+ margin-left: 16%;
+}
+th{
+    padding-right: 150px; /* adjust spacing as needed */
+}
+
+

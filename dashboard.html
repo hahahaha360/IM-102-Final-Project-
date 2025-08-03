@@ -4,9 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="dashboard.css">
-    <title>Document</title>
+    <title>Dashboard</title>
+    <style>  
+      @import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Delius&display=swap');
+    </style>
 </head>
 <body>
-    
+    <div class="headnav">
+        <h1 class="icon">II BSIT A</h1>
+    </div>
+      <div class="container">
+     <h1 class="dashboard-title">Dashboard</h1>
+        <p class="dashboard-description">Welcome to your dashboard! Here you can manage your movies, view ratings, and more.</p>
+      </div> 
+    <div class="search-box">
+        <input type="text" id="search" placeholder="Search movies..." class="search-input">
+        <button type="submit" class="searchbtn">Search</button>          
+    </div>
+    <div class="table-container">
+      <h2>Movie List</h2>
+    <table id="movies-table">
+     <tr>
+      <th>Title</th>
+      <th>Director</th>
+      <th>Release Year</th>
+      <th>Ratings</th>
+     </tr>
+    </table>
+    </div>
 </body>
 </html>
