@@ -41,7 +41,7 @@ body{
   max-width: 60%;
   height: 40px;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
   border: 1px solid #ccc;
   font-size: 16px;
 }
@@ -50,7 +50,7 @@ body{
   padding: 20px 20px;
   font-size: 16px;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #d46300;
   color: white;
   cursor: pointer;
