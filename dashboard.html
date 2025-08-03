@@ -20,9 +20,8 @@
       </div> 
     <div class="search-box">
         <input type="text" id="search" placeholder="Search movies..." class="search-input">
-        <button type="submit" class="retrievebtn">Retrieve</button> 
-         <button type="submit" class="addbtn">add</button>    
-                  
+         <button type="submit" class="addbtn" onclick="addtoggle()">add</button>    
+         <button type="submit" class="retrievebtn">Retrieve</button>                   
     </div>
     <div class="table-container">
       <h2>Movie List</h2>
@@ -35,5 +34,31 @@
      </tr>
     </table>
     </div>
+    <div id="popup">
+      <h1 class="addtxt">Add</h1>
+        <span>Title:</span>
+      <input type="text" id="title" placeholder="Movie Title" class="input-field">
+       <span>Director"</span>
+      <input type="text" id="director" placeholder="Director" class="input-field">
+       <span>Release year:</span>
+      <input type="text" id="releaseYr" placeholder="Release year" class="input-field">
+       <span>Ratings:</span>
+      <input type="text" id="ratings" placeholder="Ratings" class="input-field">
+      <div class="btn">
+       <button onclick="addtoggle2();" class="btnclose">close</button>
+       <button onclick="add();" class="btnadd">add</button>
+      </div>
+      </div>
+    <script> 
+     function addtoggle(){
+     
+        var popup = document.getElementById('popup');
+        popup.classList.toggle('active');}
+     function addtoggle2(){
+     
+        var popup = document.getElementById('popup');
+        popup.classList.toggle('active');}   
+
+    </script>
 </body>
 </html>

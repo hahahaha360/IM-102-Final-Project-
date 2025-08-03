@@ -38,7 +38,7 @@ body{
 
 .search-input {
   width: 40%;
-  margin-left: -210px;;
+  margin-left: -2%;
   height: 40px;
   padding: 10px;
   border-radius: 10px;
@@ -65,13 +65,81 @@ body{
   cursor: pointer;
 }
 .table-container{
- margin-left: 16%;
+ margin-left: 22%;
 }
 th{
     padding-right: 140px; /* adjust spacing as needed */
-   
-
 }
+#popup{
+        position:fixed;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%,-70%);
+        width: 500px;
+        padding: 50px;
+        box-shadow: 0 5px 30px #000000b6;
+        background-color:#F6F5F0;
+      
+        visibility: hidden;
+        opacity:0;
+        transition: 0.5s;
+       }
+    #popup.active{
+        top: 50%;
+        visibility: visible;
+        opacity:1;
+        transition:0.7s;
+        border-radius: 10px;
+        margin-top: 40px;
+       }
+input {
+        width: 100%;
+        padding: 10px;
+        display: flex;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        margin-left: -1.5%;
+        margin-bottom: 12px;
+       }        
+input:focus{
+          border-color: #CC6D2E;
+          outline: none;
+        }  
+input:hover{
+          background-color: #4f4f4e2a;
+          cursor: pointer;
+        }
+.btnclose{
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        background-color: #3c3b39;
+        color: white;
+        cursor: pointer;
+        margin-left: 87%;
+        margin-top: 10px;
+       }
+.btnadd{
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        background-color: #d46300;
+        color: white;
+        cursor: pointer;
+        margin-left: -35%;
+        margin-top: 10px;
+       }   
+.btn{
+   display: flex;           /* Makes children sit inline */
+   align-items: center;     /* Vertically aligns items */
+   gap: 10px;   
+}           
+
+
+       
 
 /* Small Phones */
 @media (max-width: 480px) {
