@@ -54,6 +54,12 @@
   </thead>
   <tbody>
     <!-- JS will insert new movie rows here -->
+     <tr>
+     <td>
+      <button id="editbtn">edit</button>
+      <button id="deletebtn">delete</button>
+    </td>
+    </tr>
   </tbody>
 </table>
 
@@ -73,6 +79,19 @@
             const director = document.getElementById("director").value;
             const release_year = document.getElementById("release_year").value;
             const rating = document.getElementById("rating").value;
+
+            // display input
+            const moviesTable = document.getElementById("moviesTable").getElementsByTagName('tbody')[0];
+            const newRow = moviesTable.insertRow(); 
+            // will insert a new row at the end of the table body
+            newRow.insertCell(0).textContent = title;
+            newRow.insertCell(1).textContent = director || " "; 
+            newRow.insertCell(2).textContent = release_year || " ";
+            newRow.insertCell(3).textContent = rating || " ";
+            const actionsCell = newRow.insertCell(4);
+            const editButton = document.createElement("editbtn");
+            const deleteButton = document.createElement("deletebtn");
+
 
             if (!title) {
                 alert("Please input Movie Title");
@@ -113,7 +132,7 @@
                     document.getElementById("director").value = "";
                     document.getElementById("release_year").value = "";
                     document.getElementById("rating").value = "";
-                    
+               
                 })
 
                 .catch((error) => {
