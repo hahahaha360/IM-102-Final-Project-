@@ -24,17 +24,9 @@ app.use((req, res, next) => {
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'jesse02.',
+    password: 'jakebernal',
     database: 'auth_app'
 });
-
-const dbMovies = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'jesse02.',
-    database: 'moviedb'
-});
-
 
 db.connect((err) => {
     if (err) {
@@ -91,19 +83,6 @@ app.post('/auth/register', (req, res) => {
             return res.status(500).json({ message: 'Database error' });
         }
         res.status(201).json({ message: 'User registered successfully' });
-    });
-});
-
-app.post('/addMovies', (req, res) => {
-    const { title, director, release_year, rating } = req.body;
-    const sql = 'INSERT INTO movies (title, director, release_year, rating) VALUES (?, ?, ?, ?)';
-
-    dbMovies.query(sql, [title, director, release_year, rating], (err, results) => {
-        if (err) {
-            console.error('Error inserting movie:', err);
-            return res.status(500).json({ message: 'Database error' });
-        }
-        res.status(201).json({ message: 'Movie added successfully.' });
     });
 });
 
