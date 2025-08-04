@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/hahahaha360/IM-102-Final-Project-#readme",
   "dependencies": {
-    "body-parser": "^2.2.0",
     "express": "^5.1.0",
     "mysql2": "^3.14.3"
   }

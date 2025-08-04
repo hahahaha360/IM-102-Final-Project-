@@ -33,12 +33,12 @@
        <span>Director"</span>
       <input type="text" id="director" placeholder="Director" class="input-field">
        <span>Release year:</span>
-      <input type="text" id="release_year" placeholder="Release year" class="input-field">
+      <input type="text" id="releaseYr" placeholder="Release year" class="input-field">
        <span>Ratings:</span>
-      <input type="text" id="rating" placeholder="Ratings" class="input-field">
+      <input type="text" id="ratings" placeholder="Ratings" class="input-field">
       <div class="btn">
        <button onclick="addtoggle2();" class="btnclose">close</button>
-       <button onclick="createMovies();" class="btnadd">add</button>
+       <button onclick="add();" class="btnadd">add</button>
     </div>
       </div>
       <div class="crud">
@@ -67,60 +67,6 @@
      
         var popup = document.getElementById('popup');
         popup.classList.toggle('active');}   
-
-    function createMovies() {
-            const title = document.getElementById("title").value;
-            const director = document.getElementById("director").value;
-            const release_year = document.getElementById("release_year").value;
-            const rating = document.getElementById("rating").value;
-
-            if (!title) {
-                alert("Please input Movie Title");
-                return;
-            }
-
-            const Movies = {
-                title: title,
-                director: director || " ",
-                release_year: release_year || " ",
-                rating: rating || " ",
-
-            };
-
-            console.log(JSON.stringify(Movies));
-
-            fetch("http://localhost:3000/addMovies", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(Movies),
-            })
-
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error("Network response was not OK");
-                    }
-
-                    return response.json();
-                })
-
-
-                .then((data) => {
-                    alert("Movie created sucessfully!");
-
-                    document.getElementById("title").value = "";
-                    document.getElementById("director").value = "";
-                    document.getElementById("release_year").value = "";
-                    document.getElementById("rating").value = "";
-                    
-                })
-
-                .catch((error) => {
-                    console.error("Error:", error);
-                    alert("Error creating student. Please try again.");
-                });
-        }
 
     </script>
 </body>
