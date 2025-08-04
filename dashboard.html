@@ -1,146 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="dashboard.css">
-    <title>Dashboard</title>
-    <style>  
-      @import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Delius&display=swap');
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="dashboard.css">
+  <title>Dashboard</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Delius&display=swap');
+
+    /* ✅ Added basic styles for Edit and Delete buttons */
+    .editbtn, .deletebtn {
+      padding: 8px 12px;
+      font-size: 14px;
+      margin: 0 5px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+    }
+    .editbtn {
+      background-color: #007bff;
+    }
+    .deletebtn {
+      background-color: #dc3545;
+    }
+  </style>
 </head>
 <body>
-    <div class="headnav">
-        <h1 class="icon">II BSIT A</h1>
-    </div>
-      <div class="container">
-     <h1 class="dashboard-title">Dashboard</h1>
-        <p class="dashboard-description">Welcome to your dashboard! Here you can manage your movies, view ratings, and more.</p>
-      </div> 
-    <div class="search-box">
-        <input type="text" id="search" placeholder="Search movies..." class="search-input">
-         <button type="submit" class="addbtn" onclick="addtoggle()">add</button>    
-         <button type="submit" class="retrievebtn">Retrieve</button>                   
-    </div>
-    <div class="table-container">
-      <h2>Movie List</h2>
-    </div>
-    <div id="popup">
-      <h1 class="addtxt">Add</h1>
-        <span>Title:</span>
-      <input type="text" id="title" placeholder="Movie Title" class="input-field">
-       <span>Director"</span>
-      <input type="text" id="director" placeholder="Director" class="input-field">
-       <span>Release year:</span>
-      <input type="text" id="release_year" placeholder="Release year" class="input-field">
-       <span>Ratings:</span>
-      <input type="text" id="rating" placeholder="Ratings" class="input-field">
-      <div class="btn">
-       <button onclick="addtoggle2();" class="btnclose">close</button>
-       <button onclick="createMovies();" class="btnadd">add</button>
-    </div>
-      </div>
-      <div class="crud">
+
+  <div class="headnav">
+    <h1 class="icon">II BSIT A</h1>
+  </div>
+
+  <div class="container">
+    <h1 class="dashboard-title">Dashboard</h1>
+    <p class="dashboard-description">Welcome to your dashboard! Here you can manage your movies, view ratings, and more.</p>
+  </div>
+
+  <div class="search-box">
+    <input type="text" id="search" placeholder="Search movies..." class="search-input">
+    <button type="submit" class="addbtn" onclick="addtoggle()">Add</button>
+    <button type="submit" class="retrievebtn" onclick="retrieveMovies()">Retrieve</button> <!-- ✅ Added onclick -->
+  </div>
+
+  <div class="table-container">
+    <h2>Movie List</h2>
     <table id="moviesTable">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Director</th>
-      <th>Release Year</th>
-      <th>Rating</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- JS will insert new movie rows here -->
-     <tr>
-     <td>
-      <button id="editbtn">edit</button>
-      <button id="deletebtn">delete</button>
-    </td>
-    </tr>
-  </tbody>
-</table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Director</th>
+          <th>Release Year</th>
+          <th>Rating</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- JS will insert rows here -->
+      </tbody>
+    </table>
+  </div>
 
-      </div>
-    <script> 
-     function addtoggle(){
-     
-        var popup = document.getElementById('popup');
-        popup.classList.toggle('active');}
-     function addtoggle2(){
-     
-        var popup = document.getElementById('popup');
-        popup.classList.toggle('active');}   
+  <!-- ADD MOVIE POPUP -->
+  <div id="popup">
+    <h1 class="addtxt">Add</h1>
+    <span>Title:</span>
+    <input type="text" id="title" placeholder="Movie Title" class="input-field">
+    <span>Director:</span>
+    <input type="text" id="director" placeholder="Director" class="input-field">
+    <span>Release year:</span>
+    <input type="text" id="release_year" placeholder="Release year" class="input-field">
+    <span>Ratings:</span>
+    <input type="text" id="rating" placeholder="Ratings" class="input-field">
 
-       function createMovies() {
-            const title = document.getElementById("title").value;
-            const director = document.getElementById("director").value;
-            const release_year = document.getElementById("release_year").value;
-            const rating = document.getElementById("rating").value;
+    <div class="btn">
+      <button onclick="addtoggle2();" class="btnclose">Close</button>
+      <button onclick="createMovies();" class="btnadd">Add</button>
+    </div>
+  </div>
 
-            // display input
-            const moviesTable = document.getElementById("moviesTable").getElementsByTagName('tbody')[0];
-            const newRow = moviesTable.insertRow(); 
-            // will insert a new row at the end of the table body
-            newRow.insertCell(0).textContent = title;
-            newRow.insertCell(1).textContent = director || " "; 
-            newRow.insertCell(2).textContent = release_year || " ";
-            newRow.insertCell(3).textContent = rating || " ";
-            const actionsCell = newRow.insertCell(4);
-            const editButton = document.createElement("editbtn");
-            const deleteButton = document.createElement("deletebtn");
+  <script>
+    function addtoggle() {
+      var popup = document.getElementById('popup');
+      popup.classList.toggle('active');
+    }
 
+    function addtoggle2() {
+      var popup = document.getElementById('popup');
+      popup.classList.toggle('active');
+    }
 
-            if (!title) {
-                alert("Please input Movie Title");
-                return;
-            }
+    // ✅ CREATE MOVIE
+    function createMovies() {
+      const title = document.getElementById("title").value;
+      const director = document.getElementById("director").value;
+      const release_year = document.getElementById("release_year").value;
+      const rating = document.getElementById("rating").value;
 
-            const Movies = {
-                title: title,
-                director: director || " ",
-                release_year: release_year || " ",
-                rating: rating || " ",
+      if (!title) {
+        alert("Please input Movie Title");
+        return;
+      }
 
-            };
+      const Movies = { title, director, release_year, rating };
 
-            console.log(JSON.stringify(Movies));
+      fetch("http://127.0.0.1:3000/addmovies", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Movies),
+      })
+      .then((response) => {
+        if (!response.ok) throw new Error("Network response was not OK");
+        return response.json();
+      })
+      .then((data) => {
+        alert("Movie added successfully!");
+        document.getElementById("title").value = "";
+        document.getElementById("director").value = "";
+        document.getElementById("release_year").value = "";
+        document.getElementById("rating").value = "";
+        retrieveMovies(); // ✅ Refresh list
+        addtoggle2();     // ✅ Close popup
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Error adding movie. Please try again.");
+      });
+    }
 
-            fetch("http://localhost:3000/addMovies", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(Movies),
-            })
+    // ✅ RETRIEVE MOVIES
+    function retrieveMovies() {
+      fetch("http://127.0.0.1:3000/movies")
 
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error("Network response was not OK");
-                    }
+        .then((response) => response.json())
+        .then((movies) => {
+          const tbody = document.querySelector("#moviesTable tbody");
+          tbody.innerHTML = ""; // Clear table before adding
 
-                    return response.json();
-                })
+          movies.forEach((movie) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td>${movie.title}</td>
+              <td>${movie.director}</td>
+              <td>${movie.release_year}</td>
+              <td>${movie.rating}</td>
+              <td></td>
+            `;
 
+            // ✅ Add Edit and Delete buttons
+            const actionsCell = row.querySelector("td:last-child");
 
-                .then((data) => {
-                    alert("Movie added sucessfully!");
+            const editBtn = document.createElement("button");
+            editBtn.textContent = "Edit";
+            editBtn.className = "editbtn";
+            // Future: editBtn.onclick = () => editMovie(movie.id);
 
-                    document.getElementById("title").value = "";
-                    document.getElementById("director").value = "";
-                    document.getElementById("release_year").value = "";
-                    document.getElementById("rating").value = "";
-               
-                })
+            const deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "Delete";
+            deleteBtn.className = "deletebtn";
+            // Future: deleteBtn.onclick = () => deleteMovie(movie.id);
 
-                .catch((error) => {
-                    console.error("Error:", error);
-                    alert("Error creating student. Please try again.");
-                });
-        }
+            actionsCell.appendChild(editBtn);
+            actionsCell.appendChild(deleteBtn);
 
-    </script>
+            tbody.appendChild(row);
+          });
+        })
+        .catch((error) => {
+          console.error("Error fetching movies:", error);
+          alert("Failed to load movie list.");
+        });
+    }
+
+    // ✅ Call retrieve on page load
+    window.onload = retrieveMovies;
+  </script>
 </body>
 </html>

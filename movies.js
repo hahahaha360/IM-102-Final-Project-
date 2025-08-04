@@ -9,10 +9,15 @@ app.use(bodyParser.json());
 
 
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5500');
+    const allowedOrigins = ['http://127.0.0.1:5500', 'http://localhost:5500'];
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');  // lowercase 'true' is correct
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
 
     if (req.method === 'OPTIONS') {
         return res.sendStatus(200);
@@ -20,19 +25,20 @@ app.use((req, res, next) => {
     next();
 });
 
+
 // MySQL connection
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'jakebernal',
-    database: 'auth_app'
+    password: '123456',
+    database: 'Movie'
 });
 
 const dbmovies = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'jakebernal',
-    database: 'moviedb'
+    password: '123456',
+    database: 'Movie'
 });
 
 db.connect((err) => {
@@ -71,7 +77,6 @@ app.post('/auth/login', (req, res) => {
 
         if (results.length > 0) {
             res.status(200).json({ message: 'Login successful' });
-            alert('Login successful');
         } else {
             res.status(401).json({ message: 'Incorrect username or password' });
         }
@@ -108,5 +113,35 @@ app.post('/addmovies', (req, res) => {
             return res.status(500).json({ message: 'Database error' });
         }
         res.status(201).json({ message: 'Movie added successfully' });
+    });
+});
+
+// GET MOVIES LIST ROUTE
+app.get('/movies', (req, res) => {
+    const sql = 'SELECT * FROM movies';
+    dbmovies.query(sql, (err, results) => {
+        if (err) {
+            console.error('Error retrieving movies:', err);
+            return res.status(500).json({ message: 'Database error' });
+        }
+        res.status(200).json(results); // send list of movies to frontend
+    });
+});
+// GET MOVIES LIST WITH PAGINATION & SORTING
+app.get('/movies', (req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const offset = (page - 1) * limit;
+
+    const sortBy = req.query.sortBy || 'title'; // default sort
+    const order = req.query.order === 'desc' ? 'DESC' : 'ASC'; // default ASC
+
+    const sql = `SELECT * FROM movies ORDER BY ${mysql.escapeId(sortBy)} ${order} LIMIT ? OFFSET ?`;
+    dbmovies.query(sql, [limit, offset], (err, results) => {
+        if (err) {
+            console.error('Error retrieving movies:', err);
+            return res.status(500).json({ message: 'Database error' });
+        }
+        res.status(200).json(results);
     });
 });

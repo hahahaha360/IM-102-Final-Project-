@@ -4,44 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="movies.css">
-    <title>Login</title>
+    <title>Movies CRUD</title>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
       @import url('https://fonts.googleapis.com/css2?family=Delius&display=swap');
     </style>
 </head>
 <body>
-    <div class="overlay"></div>
-    <div class="content">
+    
     <div class="headnav">
         <h1 class="icon">II BSIT A</h1>
     </div>
     <div class="txttitle">
       <h1 class="txt">Movies</h1>
       <h2 class="txt2">CRUD</h2>
- <p>
-  A simple web app to add, view, edit, and delete movies. Perfect for managing your film collection with ease and style.
-</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut <br> labore et dolore magna aliqua. 
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris <br>nisi ut aliquip ex ea commodo consequat. 
+        Duis aute irure dolor in reprehenderit in voluptate velit esse.<br> </p>
     </div>
-    </div>
+
     <div class="container">
-      <h2 class="logintxt">Login/Register</h2>
+      <h2 class="logintxt">Login</h2>
     <div class="inputs">
-    <form action="http://localhost:3000/auth/login" method="POST">
-      <input type="text" name="username" placeholder="Username:" required class="input" id="username">
-      <input type="password" name="password" placeholder="Password:" required class="input" id="password">
+    <form action="/auth/login" method="POST">
+      <input type="text" name="username" placeholder="Username:" required class="input">
+      <input type="password" name="password" placeholder="Password:" required class="input">
       <button type="submit" class="btnlogin">Login</button>
     </form>
-     <button type="submit" onclick="register()" class="btnregister">Register</button>
     </div>
     <div class="switch">
-      Don't have an account? <a href="">Click register</a>
+      Don't have an account? <a href="/register.html">Register here</a>
     </div>
     </div>
 
     <script>
           
-      // Login functionality
+      // 🔽 LOGIN FUNCTION STARTS HERE
       document.querySelector("form").addEventListener("submit", async function (e) {
         e.preventDefault();
 
@@ -60,7 +58,7 @@
           const data = await response.json();
 
           if (data.message === "Login successful") {
-            window.location.href = "/dashboard.html";
+            window.location.href = "http://127.0.0.1:5500/dashboard.html";
           } else {
             alert(data.message);
           }
@@ -70,37 +68,7 @@
           console.error("Login error:", error);
         }
       });
-
-        //register functionality
-      function register() {
-          const username = document.getElementById("username").value;
-          const password = document.getElementById("password").value;
-
-          if (username && password) {
-            fetch("http://localhost:3000/auth/register", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({ username, password })
-            })
-            .then(response => response.json())
-            .then(data => {
-              if (data.message === "User registered successfully") {
-                alert("Registration successful! You can now log in.");
-              } else {
-                alert(data.message);
-              }
-            })
-            .catch(error => {
-              alert("Server error. Please try again.");
-              console.error("Registration error:", error);
-            });
-          } else {
-            alert("Username and password cannot be empty.");
-          }
-        }
+    
     </script>
 </body>
 </html>
-
