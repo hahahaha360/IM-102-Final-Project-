@@ -28,6 +28,13 @@ const db = mysql.createConnection({
     database: 'auth_app'
 });
 
+const dbmovies = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'jakebernal',
+    database: 'moviedb'
+});
+
 db.connect((err) => {
     if (err) {
         console.error('MySQL connection failed:', err);
@@ -83,5 +90,23 @@ app.post('/auth/register', (req, res) => {
             return res.status(500).json({ message: 'Database error' });
         }
         res.status(201).json({ message: 'User registered successfully' });
+    });
+});
+
+//add movie
+app.post('/addmovies', (req, res) => {
+    const { title, director, release_year, rating } = req.body;
+
+    if (!title || !director || !release_year || !rating) {
+        return res.status(400).json({ message: 'Please provide title, director, release year and its ratings.' });
+    }
+
+    const sql = 'INSERT INTO movies (title, director, release_year, rating) VALUES (?, ?, ?, ?)';
+    dbmovies.query(sql, [title, director, release_year, rating], (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ message: 'Database error' });
+        }
+        res.status(201).json({ message: 'Movie added successfully' });
     });
 });

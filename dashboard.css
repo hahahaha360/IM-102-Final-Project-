@@ -141,12 +141,13 @@ input:hover{
 .AddCrud{}
        
 .crud{
+    
     width: 100%;
     display: flex;
     justify-content: center;   
     align-items: center;      
     gap: 10px;
-    margin-top: 10vh;        
+    margin-top: 10vh;
 }
 
 /* Small Phones */
