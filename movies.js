@@ -127,21 +127,24 @@ app.get('/movies', (req, res) => {
         res.status(200).json(results); // send list of movies to frontend
     });
 });
-// GET MOVIES LIST WITH PAGINATION & SORTING
-app.get('/movies', (req, res) => {
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
-    const offset = (page - 1) * limit;
 
-    const sortBy = req.query.sortBy || 'title'; // default sort
-    const order = req.query.order === 'desc' ? 'DESC' : 'ASC'; // default ASC
+// ✅ GET MOVIE BY ID
+app.get('/movies/:id', (req, res) => {
+    const movieId = req.params.id;
 
-    const sql = `SELECT * FROM movies ORDER BY ${mysql.escapeId(sortBy)} ${order} LIMIT ? OFFSET ?`;
-    dbmovies.query(sql, [limit, offset], (err, results) => {
+    const sql = 'SELECT * FROM movies WHERE movieID = ?';
+    dbmovies.query(sql, [movieId], (err, results) => {
         if (err) {
-            console.error('Error retrieving movies:', err);
+            console.error('Error retrieving movie by ID:', err);
             return res.status(500).json({ message: 'Database error' });
         }
-        res.status(200).json(results);
+
+        if (results.length === 0) {
+            return res.status(404).json({ message: 'Movie not found' });
+        }
+
+        res.status(200).json(results[0]); // return just the movie object
     });
 });
+
+

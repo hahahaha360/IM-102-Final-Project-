@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="dashboard.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="dashboard.css"/>
   <title>Dashboard</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Delius&display=swap');
 
-    /* ✅ Added basic styles for Edit and Delete buttons */
     .editbtn, .deletebtn {
       padding: 8px 12px;
       font-size: 14px;
@@ -25,13 +24,43 @@
     .deletebtn {
       background-color: #dc3545;
     }
+
+    /* Popup style for retrieve */
+    #retrievePopup {
+      position: fixed;
+      background: white;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      border: 2px solid #000;
+      border-radius: 10px;
+      z-index: 10;
+      display: none;
+    }
+    .btnclose, .btnadd {
+      margin: 10px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btnclose {
+      background-color: gray;
+      color: white;
+    }
+    .btnadd {
+      background-color: green;
+      color: white;
+    }
   </style>
 </head>
 <body>
 
-  <div class="headnav">
+  <div class="header-container">
     <h1 class="icon">II BSIT A</h1>
   </div>
+
 
   <div class="container">
     <h1 class="dashboard-title">Dashboard</h1>
@@ -41,7 +70,7 @@
   <div class="search-box">
     <input type="text" id="search" placeholder="Search movies..." class="search-input">
     <button type="submit" class="addbtn" onclick="addtoggle()">Add</button>
-    <button type="submit" class="retrievebtn" onclick="retrieveMovies()">Retrieve</button> <!-- ✅ Added onclick -->
+    <button type="submit" class="retrievebtn" onclick="toggleRetrievePopup()">Retrieve</button>
   </div>
 
   <div class="table-container">
@@ -49,6 +78,7 @@
     <table id="moviesTable">
       <thead>
         <tr>
+          <th>Movie ID</th>
           <th>Title</th>
           <th>Director</th>
           <th>Release Year</th>
@@ -73,25 +103,47 @@
     <input type="text" id="release_year" placeholder="Release year" class="input-field">
     <span>Ratings:</span>
     <input type="text" id="rating" placeholder="Ratings" class="input-field">
-
     <div class="btn">
       <button onclick="addtoggle2();" class="btnclose">Close</button>
       <button onclick="createMovies();" class="btnadd">Add</button>
     </div>
   </div>
 
+  <!-- ✅ RETRIEVE MOVIE BY ID POPUP -->
+  <div id="retrievePopup">
+    <h1 class="addtxt">Retrieve Movie</h1>
+    <span>Movie ID:</span>
+    <input type="number" id="retrieve_movieID" placeholder="Movie ID" class="input-field"><br><br>
+    <span>Title:</span>
+    <input type="text" id="retrieve_title" class="input-field" disabled>
+    <span>Director:</span>
+    <input type="text" id="retrieve_director" class="input-field" disabled>
+    <span>Release Year:</span>
+    <input type="text" id="retrieve_release_year" class="input-field" disabled>
+    <span>Rating:</span>
+    <input type="text" id="retrieve_rating" class="input-field" disabled>
+    <div class="btn">
+      <button onclick="toggleRetrievePopup();" class="btnclose">Close</button>
+      <button onclick="retrieveMovieByID();" class="btnadd">Retrieve</button>
+    </div>
+  </div>
+
   <script>
-    function addtoggle() {
-      var popup = document.getElementById('popup');
-      popup.classList.toggle('active');
-    }
+   function addtoggle() {
+    document.getElementById('popup').classList.add('active');
+  }
 
-    function addtoggle2() {
-      var popup = document.getElementById('popup');
-      popup.classList.toggle('active');
-    }
+  function addtoggle2() {
+    document.getElementById('popup').classList.remove('active');
+  }
 
-    // ✅ CREATE MOVIE
+
+    function toggleRetrievePopup() {
+    document.getElementById("retrievePopup").classList.toggle("active");
+  }
+
+
+
     function createMovies() {
       const title = document.getElementById("title").value;
       const director = document.getElementById("director").value;
@@ -120,8 +172,8 @@
         document.getElementById("director").value = "";
         document.getElementById("release_year").value = "";
         document.getElementById("rating").value = "";
-        retrieveMovies(); // ✅ Refresh list
-        addtoggle2();     // ✅ Close popup
+        retrieveMovies();
+        addtoggle2();
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -129,18 +181,17 @@
       });
     }
 
-    // ✅ RETRIEVE MOVIES
     function retrieveMovies() {
       fetch("http://127.0.0.1:3000/movies")
-
         .then((response) => response.json())
         .then((movies) => {
           const tbody = document.querySelector("#moviesTable tbody");
-          tbody.innerHTML = ""; // Clear table before adding
+          tbody.innerHTML = "";
 
           movies.forEach((movie) => {
             const row = document.createElement("tr");
             row.innerHTML = `
+              <td>${movie.movieID}</td>   
               <td>${movie.title}</td>
               <td>${movie.director}</td>
               <td>${movie.release_year}</td>
@@ -148,18 +199,15 @@
               <td></td>
             `;
 
-            // ✅ Add Edit and Delete buttons
             const actionsCell = row.querySelector("td:last-child");
 
             const editBtn = document.createElement("button");
             editBtn.textContent = "Edit";
             editBtn.className = "editbtn";
-            // Future: editBtn.onclick = () => editMovie(movie.id);
 
             const deleteBtn = document.createElement("button");
             deleteBtn.textContent = "Delete";
             deleteBtn.className = "deletebtn";
-            // Future: deleteBtn.onclick = () => deleteMovie(movie.id);
 
             actionsCell.appendChild(editBtn);
             actionsCell.appendChild(deleteBtn);
@@ -173,7 +221,35 @@
         });
     }
 
-    // ✅ Call retrieve on page load
+    // ✅ Retrieve movie by ID
+    function retrieveMovieByID() {
+      const movieID = document.getElementById("retrieve_movieID").value;
+      if (!movieID) {
+        alert("Please enter a Movie ID.");
+        return;
+      }
+
+      fetch(`http://127.0.0.1:3000/movies/${movieID}`)
+        .then(response => {
+          if (!response.ok) throw new Error("Movie not found.");
+          return response.json();
+        })
+        .then(data => {
+          document.getElementById("retrieve_title").value = data.title;
+          document.getElementById("retrieve_director").value = data.director;
+          document.getElementById("retrieve_release_year").value = data.release_year;
+          document.getElementById("retrieve_rating").value = data.rating;
+        })
+        .catch(error => {
+          console.error("Error retrieving movie:", error);
+          alert("Movie not found or server error.");
+          document.getElementById("retrieve_title").value = "";
+          document.getElementById("retrieve_director").value = "";
+          document.getElementById("retrieve_release_year").value = "";
+          document.getElementById("retrieve_rating").value = "";
+        });
+    }
+
     window.onload = retrieveMovies;
   </script>
 </body>
