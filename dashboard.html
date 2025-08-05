@@ -41,7 +41,7 @@
   <div class="search-box">
     <input type="text" id="search" placeholder="Search movies..." class="search-input">
     <button type="submit" class="addbtn" onclick="addtoggle()">Add</button>
-    <button type="submit" class="retrievebtn" onclick="retrieveMovies()">Retrieve</button> <!-- ✅ Added onclick -->
+    <button type="submit" class="retrievebtn" onclick="retrieveMovies()">Retrieve</button> <!--  Added onclick -->
   </div>
 
   <div class="table-container">
@@ -57,12 +57,12 @@
         </tr>
       </thead>
       <tbody>
-        <!-- JS will insert rows here -->
+       
       </tbody>
     </table>
   </div>
 
-  <!-- ADD MOVIE POPUP -->
+
   <div id="popup">
     <h1 class="addtxt">Add</h1>
     <span>Title:</span>
@@ -82,16 +82,16 @@
 
   <script>
     function addtoggle() {
-      var popup = document.getElementById('popup');
+      const popup = document.getElementById('popup');
       popup.classList.toggle('active');
     }
 
     function addtoggle2() {
-      var popup = document.getElementById('popup');
+      const popup = document.getElementById('popup');
       popup.classList.toggle('active');
     }
 
-    // ✅ CREATE MOVIE
+    //CREATE MOVIE
     function createMovies() {
       const title = document.getElementById("title").value;
       const director = document.getElementById("director").value;
@@ -115,13 +115,14 @@
         return response.json();
       })
       .then((data) => {
-        alert("Movie added successfully!");
+
+        alert( data.id + "." +" "+ title +" by " + director + " is added successfully!");
         document.getElementById("title").value = "";
         document.getElementById("director").value = "";
         document.getElementById("release_year").value = "";
         document.getElementById("rating").value = "";
-        retrieveMovies(); // ✅ Refresh list
-        addtoggle2();     // ✅ Close popup
+        retrieveMovies(); // Refresh list
+        addtoggle2();     // Close popup
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -129,7 +130,7 @@
       });
     }
 
-    // ✅ RETRIEVE MOVIES
+    // RETRIEVE MOVIES
     function retrieveMovies() {
       fetch("http://127.0.0.1:3000/movies")
 
@@ -172,7 +173,6 @@
           alert("Failed to load movie list.");
         });
     }
-
     // ✅ Call retrieve on page load
     window.onload = retrieveMovies;
   </script>

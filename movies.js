@@ -25,20 +25,19 @@ app.use((req, res, next) => {
     next();
 });
 
-
 // MySQL connection
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '123456',
-    database: 'Movie'
+    password: 'jakebernal',
+    database: 'auth_app'
 });
 
 const dbmovies = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '123456',
-    database: 'Movie'
+    password: 'jakebernal',
+    database: 'moviedb'
 });
 
 db.connect((err) => {
@@ -98,12 +97,12 @@ app.post('/auth/register', (req, res) => {
     });
 });
 
-//add movie
+// Add movie
 app.post('/addmovies', (req, res) => {
     const { title, director, release_year, rating } = req.body;
 
     if (!title || !director || !release_year || !rating) {
-        return res.status(400).json({ message: 'Please provide title, director, release year and its ratings.' });
+        return res.status(400).json({ message: 'Please provide title, director, release year, and rating.' });
     }
 
     const sql = 'INSERT INTO movies (title, director, release_year, rating) VALUES (?, ?, ?, ?)';
@@ -112,9 +111,15 @@ app.post('/addmovies', (req, res) => {
             console.error(err);
             return res.status(500).json({ message: 'Database error' });
         }
-        res.status(201).json({ message: 'Movie added successfully' });
+
+        // Return the newly created movie ID
+        res.status(201).json({ 
+            message: 'Movie added successfully', 
+            id: result.insertId 
+        });
     });
 });
+
 
 // GET MOVIES LIST ROUTE
 app.get('/movies', (req, res) => {
