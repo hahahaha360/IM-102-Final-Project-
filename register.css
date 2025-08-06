@@ -1,28 +1,18 @@
 /* Background setup */
 html, body {
-  background-image: url('https://images.unsplash.com/photo-1640725633496-96aec00d1ab2?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-image: url('https://images.unsplash.com/photo-1640725633496-96aec00d1ab2?q=80&w=1170&auto=format&fit=crop');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
+
   height: 100%;
   margin: 0;
   padding: 0;
   font-family: "Inter", sans-serif;
 }
 
-.overlay {
-  position: absolute;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 0;
-}
-
-.content {
-  position: relative;
-  z-index: 1;
-}
-
+/* Header logo */
 .icon {
   font-family: "Dela Gothic One";
   font-size: 1.3rem;
@@ -30,8 +20,10 @@ html, body {
   margin: 20px 0 0 60px;
 }
 
+/* Title section */
 .txttitle {
   margin-left: 150px;
+  margin-top: 100px;
   color: white;
 }
 
@@ -43,18 +35,18 @@ html, body {
 
 .txt2 {
   font-family: "Dela Gothic One";
-  font-size: 3.5vw;
+  font-size: 3vw;
   color: #d46300;
   margin-top: -60px;
 }
 
 p {
-  color: white;
   font-family: "Delius";
   font-size: 0.9rem;
+  color: white;
 }
 
-/* Container */
+/* Container box */
 .container {
   background-color: #d4d5d6c6;
   padding: 60px 50px;
@@ -69,6 +61,7 @@ p {
   z-index: 2;
 }
 
+/* Login title */
 .logintxt {
   font-size: 1.3rem;
   margin-bottom: 20px;
@@ -76,6 +69,7 @@ p {
   text-align: center;
 }
 
+/* Input fields */
 .input {
   width: 100%;
   height: 45px;
@@ -86,41 +80,30 @@ p {
   margin-bottom: 20px;
 }
 
-.btnlogin,
+/* Login button */
 .btnregister {
   width: 100%;
   height: 45px;
   border-radius: 5px;
   border: none;
+  background-color: #d46300;
+  color: white;
   font-size: 1rem;
   cursor: pointer;
 }
 
-.btnlogin {
-  background-color: #d46300;
-  color: white;
-}
-
-.btnregister {
-  background-color: #ede2d9f3;
-  color: #d46300;
-}
-
-.inputs {
-  margin-bottom: 15px;
-}
-
+/* Switch link */
 .switch {
   text-align: center;
   font-size: 0.9rem;
   font-family: "Inter";
+  margin-top: 10px;
 }
 
 .switch a {
   color: #d46300;
   text-decoration: none;
 }
-
 /* 🖤 Black transparent overlay */
 .overlay {
   position: fixed;
@@ -135,43 +118,29 @@ p {
   z-index: 1;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .icon {
-    margin-left: 20px;
-    font-size: 1rem;
-  }
 
+/* Responsive Styles */
+@media (max-width: 768px) {
   .txttitle {
     margin-left: 20px;
     text-align: center;
   }
 
   .txt {
-    font-size: 8vw;
+    font-size: 10vw;
   }
 
   .txt2 {
-    font-size: 5vw;
+    font-size: 6vw;
     margin-top: -30px;
-  }
-
-  p {
-    font-size: 0.8rem;
-    text-align: center;
   }
 
   .container {
     position: relative;
-    margin: 40px auto;
     top: auto;
     right: auto;
+    left: auto;
     transform: none;
-    width: 90%;
-  }
-
-  .inputs {
-    width: 100%;
-    margin: 0 auto;
+    margin: 40px auto;
   }
 }

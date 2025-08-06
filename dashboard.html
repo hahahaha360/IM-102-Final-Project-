@@ -9,6 +9,25 @@
     @import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Delius&display=swap');
 
+    body {
+      background-color: #F6F5F0;
+      font-family: "inter", sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    .header-container {
+      text-align: left;
+      padding: 10px;
+    }
+
+    .icon {
+      font-family: "Dela Gothic One", sans-serif;
+      font-size: 20px;
+      color: #CC6D2E;
+    }
+
     .editbtn, .deletebtn {
       padding: 8px 12px;
       font-size: 14px;
@@ -18,18 +37,14 @@
       cursor: pointer;
       color: white;
     }
-    .editbtn {
-      background-color: #007bff;
-    }
-    .deletebtn {
-      background-color: #dc3545;
-    }
 
-    /* Popup style for retrieve */
-    #retrievePopup {
+    .editbtn { background-color: #007bff; }
+    .deletebtn { background-color: #dc3545; }
+
+    #popup, #retrievePopup, #editPopup {
       position: fixed;
-      background: white;
-      top: 50%;
+      background: rgba(255, 255, 255, 0.811);
+      top: 55%;
       left: 50%;
       transform: translate(-50%, -50%);
       padding: 20px;
@@ -38,6 +53,7 @@
       z-index: 10;
       display: none;
     }
+
     .btnclose, .btnadd {
       margin: 10px;
       padding: 8px 16px;
@@ -45,22 +61,54 @@
       border-radius: 5px;
       cursor: pointer;
     }
-    .btnclose {
-      background-color: gray;
-      color: white;
+
+    .btnclose { background-color: gray; color: white; }
+    .btnadd { background-color: green; color: white; }
+
+    .active { display: block !important; }
+
+    .pagination-controls {
+      margin-top: 20px;
     }
-    .btnadd {
-      background-color: green;
-      color: white;
+
+    .pagination-controls button {
+      padding: 8px 12px;
+      margin: 0 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    th { cursor: pointer; }
+
+    .search-input {
+      width: 90%;
+      height: 30px; /* 👈 Increased from default */
+      padding: 14px; /* 👈 Add more padding for better visuals */
+      font-size: 18px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    .input-field {
+      color: #000;
+      display: block;
+      margin: 8px auto;
+      padding: 6px;
+      width: 90%;
     }
   </style>
 </head>
 <body>
 
-  <div class="header-container">
-    <h1 class="icon">II BSIT A</h1>
-  </div>
+  <div class="logout-container">
+  <button onclick="logout()">Logout</button>
+</div>
 
+
+
+  <div class="header-container">
+    <h1 class="icon">CRUDFlix</h1>
+  </div>
 
   <div class="container">
     <h1 class="dashboard-title">Dashboard</h1>
@@ -68,91 +116,113 @@
   </div>
 
   <div class="search-box">
-    <input type="text" id="search" placeholder="Search movies..." class="search-input">
-    <button type="submit" class="addbtn" onclick="addtoggle()">Add</button>
-    <button type="submit" class="retrievebtn" onclick="toggleRetrievePopup()">Retrieve</button>
+  <input type="text" id="search" placeholder="Search keywords..." class="search-input">
+
+  <div class="button-row">
+    <button class="btnadd" onclick="addtoggle()">Add</button>
+    <button class="btnadd" onclick="toggleRetrievePopup()">Retrieve</button>
   </div>
+  </div>
+
 
   <div class="table-container">
     <h2>Movie List</h2>
-    <table id="moviesTable">
+    <table id="moviesTable" border="1" cellspacing="0" cellpadding="5" style="margin: auto;">
       <thead>
         <tr>
-          <th>Movie ID</th>
-          <th>Title</th>
-          <th>Director</th>
-          <th>Release Year</th>
-          <th>Rating</th>
+          <th onclick="sortTable('movieID')">Movie ID</th>
+          <th onclick="sortTable('title')">Title</th>
+          <th onclick="sortTable('director')">Director</th>
+          <th onclick="sortTable('release_year')">Release Year</th>
+          <th onclick="sortTable('rating')">Rating</th>
           <th>Actions</th>
         </tr>
       </thead>
-      <tbody>
-        <!-- JS will insert rows here -->
-      </tbody>
+      <tbody></tbody>
     </table>
+    <div class="pagination-controls">
+      <button onclick="changePage('prev')">Previous</button>
+      <span id="pageIndicator">Page 1</span>
+      <button onclick="changePage('next')">Next</button>
+    </div>
   </div>
 
   <!-- ADD MOVIE POPUP -->
   <div id="popup">
-    <h1 class="addtxt">Add</h1>
-    <span>Title:</span>
-    <input type="text" id="title" placeholder="Movie Title" class="input-field">
-    <span>Director:</span>
+    <h2>Add Movie</h2>
+    <input type="text" id="title" placeholder="Title" class="input-field">
     <input type="text" id="director" placeholder="Director" class="input-field">
-    <span>Release year:</span>
-    <input type="text" id="release_year" placeholder="Release year" class="input-field">
-    <span>Ratings:</span>
-    <input type="text" id="rating" placeholder="Ratings" class="input-field">
-    <div class="btn">
-      <button onclick="addtoggle2();" class="btnclose">Close</button>
-      <button onclick="createMovies();" class="btnadd">Add</button>
-    </div>
+    <input type="number" id="release_year" placeholder="Release Year" class="input-field">
+    <input type="number" id="rating" placeholder="Rating (0-10)" step="0.1" class="input-field">
+    <button onclick="addtoggle2();" class="btnclose">Close</button>
+    <button onclick="createMovies();" class="btnadd">Add</button>
   </div>
 
-  <!-- ✅ RETRIEVE MOVIE BY ID POPUP -->
+  <!-- RETRIEVE MOVIE POPUP -->
   <div id="retrievePopup">
-    <h1 class="addtxt">Retrieve Movie</h1>
-    <span>Movie ID:</span>
-    <input type="number" id="retrieve_movieID" placeholder="Movie ID" class="input-field"><br><br>
-    <span>Title:</span>
+    <h2>Retrieve Movie</h2>
+    <input type="number" id="retrieve_movieID" placeholder="Movie ID" class="input-field">
     <input type="text" id="retrieve_title" class="input-field" disabled>
-    <span>Director:</span>
     <input type="text" id="retrieve_director" class="input-field" disabled>
-    <span>Release Year:</span>
     <input type="text" id="retrieve_release_year" class="input-field" disabled>
-    <span>Rating:</span>
     <input type="text" id="retrieve_rating" class="input-field" disabled>
-    <div class="btn">
-      <button onclick="toggleRetrievePopup();" class="btnclose">Close</button>
-      <button onclick="retrieveMovieByID();" class="btnadd">Retrieve</button>
-    </div>
+    <button onclick="toggleRetrievePopup();" class="btnclose">Close</button>
+    <button onclick="retrieveMovieByID();" class="btnadd">Retrieve</button>
+  </div>
+
+  <!-- EDIT MOVIE POPUP -->
+  <div id="editPopup">
+    <h2>Edit Movie</h2>
+    <input type="hidden" id="edit_movieID">
+    <input type="text" id="edit_title" class="input-field">
+    <input type="text" id="edit_director" class="input-field">
+    <input type="number" id="edit_release_year" class="input-field">
+    <input type="number" id="edit_rating" step="0.1" class="input-field">
+    <button onclick="toggleEditPopup();" class="btnclose">Close</button>
+    <button onclick="updateMovie();" class="btnadd">Update</button>
   </div>
 
   <script>
-   function addtoggle() {
-    document.getElementById('popup').classList.add('active');
-  }
+    // Prevent access if not logged in
+    if (!localStorage.getItem("isLoggedIn")) {
+      alert("Please log in first.");
+      window.location.href = "http://127.0.0.1:5500/movies.html"; // or your login page path
+    }
 
-  function addtoggle2() {
-    document.getElementById('popup').classList.remove('active');
-  }
+    function logout() {
+      localStorage.removeItem("isLoggedIn");
+      alert("Logged out successfully!");
+      window.location.href = "http://127.0.0.1:5500/movies.html"; // or your login page path
+    }
 
+    let currentPage = 1;
+    let sortBy = 'movieID';
+    let order = 'asc';
+
+    function addtoggle() {
+      document.getElementById('popup').classList.add('active');
+    }
+
+    function addtoggle2() {
+      document.getElementById('popup').classList.remove('active');
+    }
 
     function toggleRetrievePopup() {
-    document.getElementById("retrievePopup").classList.toggle("active");
-  }
+      document.getElementById("retrievePopup").classList.toggle("active");
+    }
 
-
+    function toggleEditPopup() {
+      document.getElementById("editPopup").classList.toggle("active");
+    }
 
     function createMovies() {
       const title = document.getElementById("title").value;
       const director = document.getElementById("director").value;
-      const release_year = document.getElementById("release_year").value;
-      const rating = document.getElementById("rating").value;
+      const release_year = parseInt(document.getElementById("release_year").value);
+      const rating = parseFloat(document.getElementById("rating").value);
 
-      if (!title) {
-        alert("Please input Movie Title");
-        return;
+      if (!title || !director || isNaN(release_year) || isNaN(rating)) {
+        return alert("Please fill in all fields correctly.");
       }
 
       const Movies = { title, director, release_year, rating };
@@ -162,11 +232,8 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(Movies),
       })
-      .then((response) => {
-        if (!response.ok) throw new Error("Network response was not OK");
-        return response.json();
-      })
-      .then((data) => {
+      .then(res => res.json())
+      .then(() => {
         alert("Movie added successfully!");
         document.getElementById("title").value = "";
         document.getElementById("director").value = "";
@@ -175,23 +242,21 @@
         retrieveMovies();
         addtoggle2();
       })
-      .catch((error) => {
-        console.error("Error:", error);
-        alert("Error adding movie. Please try again.");
-      });
+      .catch(() => alert("Error adding movie."));
     }
 
     function retrieveMovies() {
-      fetch("http://127.0.0.1:3000/movies")
-        .then((response) => response.json())
-        .then((movies) => {
+      const search = document.getElementById("search").value;
+      fetch(`http://127.0.0.1:3000/movies?page=${currentPage}&limit=10&sortBy=${sortBy}&order=${order}&search=${encodeURIComponent(search)}`)
+        .then(res => res.json())
+        .then(movies => {
           const tbody = document.querySelector("#moviesTable tbody");
           tbody.innerHTML = "";
 
-          movies.forEach((movie) => {
+          movies.forEach(movie => {
             const row = document.createElement("tr");
             row.innerHTML = `
-              <td>${movie.movieID}</td>   
+              <td>${movie.movieID}</td>
               <td>${movie.title}</td>
               <td>${movie.director}</td>
               <td>${movie.release_year}</td>
@@ -204,53 +269,99 @@
             const editBtn = document.createElement("button");
             editBtn.textContent = "Edit";
             editBtn.className = "editbtn";
+            editBtn.onclick = () => {
+              document.getElementById("edit_movieID").value = movie.movieID;
+              document.getElementById("edit_title").value = movie.title;
+              document.getElementById("edit_director").value = movie.director;
+              document.getElementById("edit_release_year").value = movie.release_year;
+              document.getElementById("edit_rating").value = movie.rating;
+              toggleEditPopup();
+            };
 
             const deleteBtn = document.createElement("button");
             deleteBtn.textContent = "Delete";
             deleteBtn.className = "deletebtn";
+            deleteBtn.onclick = () => {
+              if (confirm(`Are you sure you want to delete movie ID ${movie.movieID}?`)) {
+                fetch(`http://127.0.0.1:3000/deleteMovies/${movie.movieID}`, { method: 'DELETE' })
+                  .then(() => {
+                    alert("Movie deleted successfully!");
+                    retrieveMovies();
+                  })
+                  .catch(() => alert("Failed to delete movie."));
+              }
+            };
 
             actionsCell.appendChild(editBtn);
             actionsCell.appendChild(deleteBtn);
-
             tbody.appendChild(row);
           });
-        })
-        .catch((error) => {
-          console.error("Error fetching movies:", error);
-          alert("Failed to load movie list.");
+
+          document.getElementById("pageIndicator").innerText = `Page ${currentPage}`;
         });
     }
 
-    // ✅ Retrieve movie by ID
+    function changePage(direction) {
+      if (direction === 'next') currentPage++;
+      else if (direction === 'prev' && currentPage > 1) currentPage--;
+      retrieveMovies();
+    }
+
+    function sortTable(column) {
+      if (sortBy === column) {
+        order = order === 'asc' ? 'desc' : 'asc';
+      } else {
+        sortBy = column;
+        order = 'asc';
+      }
+      retrieveMovies();
+    }
+
     function retrieveMovieByID() {
       const movieID = document.getElementById("retrieve_movieID").value;
-      if (!movieID) {
-        alert("Please enter a Movie ID.");
-        return;
-      }
-
       fetch(`http://127.0.0.1:3000/movies/${movieID}`)
-        .then(response => {
-          if (!response.ok) throw new Error("Movie not found.");
-          return response.json();
-        })
+        .then(res => res.json())
         .then(data => {
           document.getElementById("retrieve_title").value = data.title;
           document.getElementById("retrieve_director").value = data.director;
           document.getElementById("retrieve_release_year").value = data.release_year;
           document.getElementById("retrieve_rating").value = data.rating;
         })
-        .catch(error => {
-          console.error("Error retrieving movie:", error);
-          alert("Movie not found or server error.");
-          document.getElementById("retrieve_title").value = "";
-          document.getElementById("retrieve_director").value = "";
-          document.getElementById("retrieve_release_year").value = "";
-          document.getElementById("retrieve_rating").value = "";
-        });
+        .catch(() => alert("Movie not found."));
     }
 
-    window.onload = retrieveMovies;
+    function updateMovie() {
+      const movieID = document.getElementById("edit_movieID").value;
+      const title = document.getElementById("edit_title").value;
+      const director = document.getElementById("edit_director").value;
+      const release_year = parseInt(document.getElementById("edit_release_year").value);
+      const rating = parseFloat(document.getElementById("edit_rating").value);
+
+      if (!title || !director || isNaN(release_year) || isNaN(rating)) {
+        return alert("Please fill all fields correctly.");
+      }
+
+      fetch(`http://127.0.0.1:3000/updateMovies/${movieID}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, director, release_year, rating })
+      })
+      .then(res => res.json())
+      .then(() => {
+        alert("Movie updated!");
+        retrieveMovies();
+        toggleEditPopup();
+      })
+      .catch(() => alert("Error updating movie."));
+    }
+
+    window.onload = () => {
+      retrieveMovies();
+      document.getElementById("search").addEventListener("input", () => {
+        currentPage = 1;
+        retrieveMovies();
+      });
+    };
   </script>
 </body>
 </html>

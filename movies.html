@@ -11,16 +11,17 @@
     </style>
 </head>
 <body>
-    
+    <div class="overlay"></div>
+  <div class="content">
+    <!-- All your page content here -->
+ 
     <div class="headnav">
-        <h1 class="icon">II BSIT A</h1>
+        <h1 class="icon">CRUDflix</h1>
     </div>
     <div class="txttitle">
-      <h1 class="txt">Movies</h1>
-      <h2 class="txt2">CRUD</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut <br> labore et dolore magna aliqua. 
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris <br>nisi ut aliquip ex ea commodo consequat. 
-        Duis aute irure dolor in reprehenderit in voluptate velit esse.<br> </p>
+      <h1 class="txt">ENJOY FREE MOVIES</h1>
+      <h2 class="txt2">CRUDflix</h2>
+      <p>This site does not store any files on our server, we only linked to the media which is hosted on 3rd party services. <br>2025 CRUDflix, Inc.<br> </p>
     </div>
 
     <div class="container">
@@ -36,7 +37,7 @@
       Don't have an account? <a href="/register.html">Register here</a>
     </div>
     </div>
-
+  </div>
     <script>
           
       // 🔽 LOGIN FUNCTION STARTS HERE
@@ -58,6 +59,9 @@
           const data = await response.json();
 
           if (data.message === "Login successful") {
+            // Save login state
+            localStorage.setItem("isLoggedIn", "true");
+            // Redirect to dashboard
             window.location.href = "http://127.0.0.1:5500/dashboard.html";
           } else {
             alert(data.message);

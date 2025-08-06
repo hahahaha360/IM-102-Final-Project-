@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="register.css"/>
+  <title>Register - Movies CRUD</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Delius&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+  </style>
+</head>
+<body>
+ <div class="overlay"></div>
+  <div class="content">
+    <!-- All your page content here -->
+ 
+  <div class="headnav">
+    <h1 class="icon">CRUDflix</h1>
+  </div>
+
+  <div class="txttitle">
+    <h1 class="txt">Register</h1>
+    <h2 class="txt2">Create Account</h2>
+    <p>This site does not store any files on our server, we only linked to the media which is hosted on 3rd party services. <br>2025 CRUDflix, Inc.</p>
+  </div>
+
+  <div class="container">
+    <h2 class="logintxt">Register</h2>
+    <div class="inputs">
+      <form id="registerForm">
+        <input type="text" name="username" placeholder="Username:" required class="input" />
+        <input type="password" name="password" placeholder="Password:" required class="input" />
+        <button type="submit" class="btnregister">Register</button>
+      </form>
+    </div>
+    <div class="switch">
+      Already have an account? <a href="movies.html">Login here</a>
+    </div>
+  </div>
+  </div>
+  <script>
+    document.getElementById("registerForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const username = document.querySelector('input[name="username"]').value;
+      const password = document.querySelector('input[name="password"]').value;
+
+      try {
+        const response = await fetch("http://localhost:3000/auth/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ username, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          alert(data.message);
+          window.location.href = "movies.html";
+        } else {
+          alert(data.message);
+        }
+
+      } catch (error) {
+        alert("Server error. Please try again.");
+        console.error("Register error:", error);
+      }
+    });
+  </script>
+
+</body>
+</html>

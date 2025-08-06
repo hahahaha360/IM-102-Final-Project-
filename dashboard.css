@@ -1,137 +1,205 @@
+/* === Background Blur with Old Cinema Image === */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-image: url('https://images.unsplash.com/photo-1640725633496-96aec00d1ab2?q=80');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  filter: blur(3px) brightness(0.15);
+  z-index: -1;
+}
+
+/* === Global Styles === */
 body {
-  background-color: #F6F5F0;
-  font-family: "inter";
-  height: 100%;
+  font-family: "Inter", sans-serif;
   margin: 0;
   padding: 0;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  z-index: 0;
+  color: #f4eadd;
 }
 
+.logout-container {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+
+.logout-container button {
+  padding: 8px 16px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.logout-container button:hover {
+  background-color: #b52d3a;
+}
+
+
+/* === Header === */
 .header-container {
-  width: 100%;
+  width: 90%;
   text-align: left;
+  padding-left: 20px;
 }
-
 
 .icon {
-  font-family: "Dela Gothic One";
-  font-weight: 50;
-  font-style: normal;
-  font-size: 120%;
-  color: #CC6D2E;
-  margin: 20px 0 0 0;
+  font-family: "Dela Gothic One", cursive;
+  font-size: 160%;
+  color: #f9c784;
+  margin: 20px 0 0;
 }
 
-.container {
-  text-align: center;
-}
-
+/* === Dashboard Title === */
 .dashboard-title {
-  font-weight: 100;
-  font-style: normal;
+  font-family: 'Dela Gothic One', cursive;
   font-size: 350%;
+  font-weight: 100;
   margin-top: 20px;
+  color: #f4eadd;
 }
 
 .dashboard-description {
-  opacity: 60%;
+  opacity: 0.8;
+  color: #f4eadd;
+  font-size: x-large;
 }
 
+/* === Search Bar & Buttons === */
 .search-box {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
   margin-top: 5vh;
   width: 100%;
 }
 
-.search-input {
-  width: 40%;
-  height: 40px;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  font-size: 16px;
+.button-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
-.retrievebtn,
-.addbtn {
-  padding: 20px 30px;
+.search-input {
+  width: 60%;
+  height: 50px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(244, 234, 221, 0.7);
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #f4eadd;
+  font-size: 20px;
+  backdrop-filter: blur(6px);
+}
+
+.pagination-controls{
+  margin-top: 40px;
+}
+
+.btnadd, .pagination-controls button {
+  padding: 10px 20px;
   font-size: 16px;
   border: none;
   border-radius: 10px;
-  background-color: #d46300;
-  color: white;
+  background: rgba(249, 199, 132, 0.85);
+  color: #1e1e1e;
   cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(249, 199, 132, 0.4);
 }
 
-/* ✅ Centered table styling */
+.btnadd:hover, .pagination-controls button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(249, 199, 132, 0.7);
+}
+
+h2{
+  font-family: 'Dela Gothic One', cursive;
+  font-size: 200%;
+  color: #020202b7;
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* === Table === */
 .table-container {
   width: 100%;
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
-  margin-top: 30px;
+  margin-bottom: 50px;
+  margin-top:20px ;
 }
 
 table {
   width: 80%;
-  table-layout: fixed;
-  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+  color: #f4eadd;
   font-family: 'Delius', sans-serif;
-  background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 th, td {
-  padding: 12px 15px;
+  padding: 14px 16px;
   text-align: center;
-  border-bottom: 1px solid #ddd;
-  word-break: break-word;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(244, 234, 221, 0.3);
 }
 
 th {
-  background-color: #f7f7f7;
   font-weight: bold;
   font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+th:hover {
+  background-color: rgba(244, 234, 221, 0.1);
+}
+
+tr:nth-child(even) {
+  background-color: rgba(244, 234, 221, 0.05);
 }
 
 tr:hover {
-  background-color: #f1f1f1;
+  background-color: rgba(244, 234, 221, 0.1);
 }
 
-h2 {
-  font-family: 'Dela Gothic One', cursive;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-#popup,
-#retrievePopup {
+/* === Popups === */
+#popup, #retrievePopup {
   position: fixed;
-  top: 50%;
-  left: 50%;
+  top: 50%; left: 50%;
   transform: translate(-50%, -60%);
   width: 500px;
   padding: 50px;
-  box-shadow: 0 5px 30px #000000b6;
-  background-color: #F6F5F0;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #f4eadd;
   border-radius: 10px;
-  z-index: 10;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 5px 30px #000000b6;
   visibility: hidden;
   opacity: 0;
+  z-index: 10;
 }
 
-#popup.active,
-#retrievePopup.active {
-  top: 50%;
+#popup.active, #retrievePopup.active {
   visibility: visible;
   opacity: 1;
-  display: block;
   animation: slideDown 0.5s ease forwards;
 }
 
@@ -146,103 +214,73 @@ h2 {
   }
 }
 
+/* === Form Inputs === */
 input {
   width: 100%;
   padding: 10px;
-  display: flex;
-  border-radius: 5px;
-  border: 1px solid #ccc;
   font-size: 16px;
   margin-bottom: 12px;
+  border-radius: 5px;
+  border: 1px solid rgba(244, 234, 221, 0.8);
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #f4eadd;
 }
 
 input:focus {
-  border-color: #CC6D2E;
+  border-color: #f9c784;
   outline: none;
 }
 
 input:hover {
-  background-color: #4f4f4e2a;
-  cursor: pointer;
+  background-color: rgba(244, 234, 221, 0.1);
 }
 
-.btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
+/* === Misc Buttons === */
 .btnclose {
+  margin-left: auto;
   padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
   background-color: #3c3b39;
   color: white;
-  cursor: pointer;
-  margin-left: auto;
-}
-
-.btnadd {
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
   border-radius: 5px;
-  background-color: #d46300;
-  color: white;
   cursor: pointer;
 }
 
-.editbtn,
-.deletebtn {
+.editbtn, .deletebtn {
   padding: 8px 12px;
   font-size: 14px;
   margin: 0 5px;
-  border: none;
   border-radius: 5px;
-  cursor: pointer;
   color: white;
+  cursor: pointer;
 }
 
-.editbtn {
-  background-color: #007bff;
+.editbtn { background-color: #007bff; }
+.deletebtn { background-color: #dc3545; }
+
+/* === Pagination === */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 25px;
 }
 
-.deletebtn {
-  background-color: #dc3545;
+#pageIndicator {
+  font-family: 'Dela Gothic One', cursive;
+  font-size: 16px;
+  color: #f4eadd;
 }
 
-/* Responsive Design */
+/* === Responsive Layout === */
 @media (max-width: 480px) {
-  .search-input {
-    max-width: 80%;
-    font-size: 14px;
-  }
-
-  .table-container {
-    margin-left: 5%;
-    overflow-x: auto;
-  }
+  .search-input { max-width: 80%; font-size: 14px; }
+  .table-container { margin-left: 5%; overflow-x: auto; }
 }
-
 @media (min-width: 481px) and (max-width: 768px) {
-  .search-input {
-    max-width: 70%;
-  }
-
-  .table-container {
-    margin-left: 8%;
-  }
+  .search-input { max-width: 70%; }
+  .table-container { margin-left: 8%; }
 }
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .search-input {
-    max-width: 60%;
-  }
-}
-
-@media (min-width: 1025px) {
-  .search-input {
-    max-width: 60%;
-  }
+@media (min-width: 769px) {
+  .search-input { max-width: 60%; }
 }
